@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morning Marine Routine</title>
+<style>
+  :root {
+    /* Oceanz Vital palette */
+    --teal:       #2a9d8f;
+    --teal-light: #4dbfb3;
+    --teal-pale:  #e8f7f6;
+    --gold:       #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-pale:  #fdf6e3;
+    --navy:       #1a3a4a;
+    --navy-soft:  #2c5364;
+    --white:      #ffffff;
+    --off-white:  #f7fbfc;
+    --light-grey: #eaf3f5;
+    --mid-grey:   #7a9aaa;
+    --text:       #1a3a4a;
+    --text-soft:  #4a6a7a;
+    --danger:     #e05252;
+    --success:    #2a9d8f;
+    --border:     #d0e8ec;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Trebuchet MS','Segoe UI',sans-serif; background: var(--off-white); color: var(--text); min-height: 100vh; }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--white);
+    border-bottom: 2px solid var(--teal);
+    padding: 14px 28px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 12px rgba(42,157,143,.08);
+  }
+  .brand { font-family: 'Arial Black',Impact,sans-serif; font-size: 1.2rem; letter-spacing: 2px; color: var(--teal); }
+  .brand span { color: var(--navy); }
+  .nav-tabs { display: flex; gap: 4px; }
+  .nav-tab { background: none; border: 1px solid transparent; color: var(--mid-grey); padding: 6px 18px; font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; border-radius: 20px; transition: all .2s; }
+  .nav-tab:hover { color: var(--teal); border-color: var(--border); background: var(--teal-pale); }
+  .nav-tab.active { color: var(--white); border-color: var(--teal); background: var(--teal); }
+
+  /* ── LAYOUT ── */
+  .view { display: none; } .view.active { display: block; }
+  .admin-layout { max-width: 1100px; margin: 0 auto; padding: 36px 24px; }
+  .section-title { font-family: 'Arial Black',Impact,sans-serif; font-size: 1.3rem; letter-spacing: 2px; color: var(--navy); margin-bottom: 4px; }
+  .section-sub { color: var(--mid-grey); font-size: 0.82rem; letter-spacing: 0.5px; margin-bottom: 20px; }
+
+  /* ── CARDS ── */
+  .card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 28px; box-shadow: 0 2px 16px rgba(42,157,143,.06); }
+
+  /* ── FORM ── */
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 14px; align-items: end; }
+  .form-group label { display: block; font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--mid-grey); margin-bottom: 6px; font-weight: 600; }
+  .form-group input, .form-group select { width: 100%; background: var(--off-white); border: 1.5px solid var(--border); color: var(--text); padding: 10px 14px; border-radius: 8px; font-size: 0.9rem; outline: none; transition: border-color .2s; }
+  .form-group input:focus, .form-group select:focus { border-color: var(--teal); background: var(--white); }
+  .form-group select option { background: var(--white); }
+
+  /* ── BUTTONS ── */
+  .btn { padding: 10px 22px; border: none; border-radius: 8px; font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all .2s; white-space: nowrap; font-weight: 700; }
+  .btn-teal { background: var(--teal); color: var(--white); } .btn-teal:hover { background: var(--teal-light); transform: translateY(-1px); }
+  .btn-ghost { background: transparent; border: 1.5px solid var(--border); color: var(--text-soft); } .btn-ghost:hover { border-color: var(--teal); color: var(--teal); background: var(--teal-pale); }
+  .btn-gold { background: var(--gold); color: var(--white); } .btn-gold:hover { background: var(--gold-light); }
+
+  /* ── TABLE ── */
+  .client-table { width: 100%; border-collapse: collapse; }
+  .client-table th { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--teal); padding: 12px 16px; text-align: left; border-bottom: 2px solid var(--border); background: var(--teal-pale); }
+  .client-table th:first-child { border-radius: 0; }
+  .client-table td { padding: 14px 16px; font-size: 0.88rem; border-bottom: 1px solid var(--light-grey); vertical-align: middle; color: var(--text); }
+  .client-table tr:last-child td { border-bottom: none; }
+  .client-table tr:hover td { background: var(--off-white); }
+  .score-badge { display: inline-block; font-weight: 700; font-size: 0.78rem; padding: 4px 12px; border-radius: 20px; }
+  .score-badge.high { background: var(--teal-pale); color: var(--teal); border: 1px solid var(--teal-light); }
+  .score-badge.mid  { background: var(--gold-pale);  color: var(--gold);  border: 1px solid var(--gold-light); }
+  .score-badge.low  { background: var(--light-grey); color: var(--mid-grey); border: 1px solid var(--border); }
+  .url-text { font-size: 0.72rem; color: var(--mid-grey); max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block; }
+  .action-btns { display: flex; gap: 6px; }
+  .mini-btn { background: transparent; border: 1.5px solid var(--border); color: var(--mid-grey); padding: 5px 12px; font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase; border-radius: 6px; cursor: pointer; transition: all .2s; font-weight: 600; }
+  .mini-btn:hover { border-color: var(--teal); color: var(--teal); background: var(--teal-pale); }
+  .mini-btn.copied { border-color: var(--success); color: var(--success); background: var(--teal-pale); }
+  .empty-state { text-align: center; padding: 56px; color: var(--mid-grey); font-size: 0.88rem; }
+  .empty-state .icon { font-size: 2.5rem; margin-bottom: 12px; display: block; }
+  .loading { text-align: center; padding: 48px; color: var(--mid-grey); }
+  .spinner { display: inline-block; width: 28px; height: 28px; border: 2.5px solid var(--border); border-top-color: var(--teal); border-radius: 50%; animation: spin .8s linear infinite; margin-bottom: 12px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── QR MODAL ── */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(26,58,74,.5); z-index: 200; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
+  .modal-overlay.open { display: flex; }
+  .modal-box { background: var(--white); border: 1px solid var(--border); border-top: 4px solid var(--teal); border-radius: 16px; padding: 36px 32px; max-width: 340px; width: 92%; text-align: center; position: relative; box-shadow: 0 20px 60px rgba(26,58,74,.15); }
+  .modal-close { position: absolute; top: 14px; right: 18px; background: none; border: none; color: var(--mid-grey); font-size: 1.3rem; cursor: pointer; } .modal-close:hover { color: var(--text); }
+  .modal-name { font-family: 'Arial Black',Impact,sans-serif; font-size: 1.1rem; letter-spacing: 2px; color: var(--navy); margin-bottom: 4px; text-transform: uppercase; }
+  .modal-sub { font-size: 0.75rem; color: var(--teal); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; }
+  .modal-url { font-size: 0.65rem; color: var(--mid-grey); word-break: break-all; margin-bottom: 16px; font-family: monospace; background: var(--light-grey); padding: 8px; border-radius: 6px; }
+  .modal-actions { margin-top: 16px; display: flex; gap: 10px; justify-content: center; }
+
+  /* ── CLIENT PAGE ── */
+  .client-page {
+    min-height: 100vh;
+    background: linear-gradient(170deg, #e8f7f6 0%, #c8eae8 20%, #eaf6fb 50%, #f7fbfc 80%, #ffffff 100%);
+  }
+  .client-inner { max-width: 440px; margin: 0 auto; padding: 48px 24px 72px; }
+
+  .client-header { text-align: center; margin-bottom: 32px; }
+  .client-logo {
+    display: inline-block;
+    font-size: 0.68rem; letter-spacing: 5px; text-transform: uppercase;
+    color: var(--teal); font-weight: 700;
+    margin-bottom: 24px;
+    padding: 6px 16px;
+    border: 1px solid var(--teal-light);
+    border-radius: 20px;
+    background: var(--white);
+  }
+  .client-greeting { font-family: 'Arial Black',Impact,sans-serif; font-size: 2.6rem; line-height: 1.1; color: var(--navy); margin-bottom: 8px; }
+  .client-greeting span { color: var(--teal); }
+  .client-date { color: var(--mid-grey); font-size: 0.82rem; letter-spacing: 1.5px; text-transform: uppercase; }
+
+  /* check-in button */
+  .checkin-wrap { margin: 32px 0 28px; }
+  .checkin-btn {
+    display: block; width: 100%;
+    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+    color: var(--white);
+    font-family: 'Arial Black',Impact,sans-serif;
+    font-size: 1.3rem; letter-spacing: 3px;
+    padding: 20px; border-radius: 12px; border: none; cursor: pointer;
+    box-shadow: 0 6px 28px rgba(42,157,143,.35);
+    transition: all .2s;
+  }
+  .checkin-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(42,157,143,.45); }
+  .checkin-btn.done {
+    background: linear-gradient(135deg, #e8f7f6 0%, #d0eeeb 100%);
+    color: var(--teal); box-shadow: none; cursor: default;
+    border: 2px solid var(--teal-light);
+  }
+  .checkin-btn.done:hover { transform: none; }
+  .checkin-status { margin-top: 10px; font-size: 0.8rem; color: var(--mid-grey); min-height: 18px; text-align: center; }
+  .checkin-status.ok { color: var(--teal); font-weight: 600; }
+
+  /* stats */
+  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+  .stat-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px 16px; text-align: center;
+    box-shadow: 0 2px 12px rgba(42,157,143,.06);
+  }
+  .stat-card.highlight {
+    grid-column: 1/-1;
+    background: linear-gradient(135deg, var(--teal) 0%, var(--navy-soft) 100%);
+    border: none;
+    box-shadow: 0 6px 24px rgba(42,157,143,.25);
+  }
+  .stat-label { font-size: 0.66rem; letter-spacing: 2px; text-transform: uppercase; color: var(--mid-grey); margin-bottom: 8px; font-weight: 600; }
+  .stat-card.highlight .stat-label { color: rgba(255,255,255,.7); }
+  .stat-value { font-family: 'Arial Black',Impact,sans-serif; font-size: 2.8rem; line-height: 1; color: var(--navy); }
+  .stat-value.teal { color: var(--teal); }
+  .stat-card.highlight .stat-value { color: var(--white); font-size: 3.2rem; }
+  .stat-note { font-size: 0.7rem; color: var(--mid-grey); margin-top: 6px; }
+  .stat-card.highlight .stat-note { color: rgba(255,255,255,.6); }
+
+  /* quote */
+  .quote-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    border-radius: 0 12px 12px 0;
+    padding: 20px 20px 20px 22px;
+    box-shadow: 0 2px 12px rgba(201,168,76,.08);
+  }
+  .quote-text { font-style: italic; font-size: 0.92rem; line-height: 1.65; color: var(--text-soft); margin-bottom: 10px; }
+  .quote-author { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+
+  .not-found { text-align: center; padding: 80px 20px; color: var(--mid-grey); }
+  .not-found h2 { font-family: 'Arial Black',Impact,sans-serif; font-size: 3rem; color: var(--border); letter-spacing: 4px; margin-bottom: 12px; }
+  .not-found p { color: var(--mid-grey); }
+
+  /* toast */
+  .toast { position: fixed; bottom: 28px; right: 28px; background: var(--teal); color: var(--white); font-size: 0.82rem; letter-spacing: 1px; padding: 12px 22px; border-radius: 8px; font-weight: 700; opacity: 0; transform: translateY(10px); transition: all .3s; z-index: 999; pointer-events: none; box-shadow: 0 4px 20px rgba(42,157,143,.4); }
+  .toast.show { opacity: 1; transform: translateY(0); }
+
+  /* wave divider on client page */
+  .wave-divider { width: 60px; height: 3px; background: linear-gradient(90deg, var(--teal), var(--teal-light)); border-radius: 2px; margin: 20px auto; }
+
+  @media(max-width:600px) { .form-grid { grid-template-columns:1fr 1fr; } .form-grid .btn { grid-column:1/-1; } .client-table th:nth-child(3),.client-table td:nth-child(3){display:none;} }
+  @media(max-width:400px) { .form-grid { grid-template-columns:1fr; } .client-greeting { font-size: 2rem; } }
+</style>
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <div class="brand">Morning <span>Marine</span> Routine</div>
+  <nav class="nav-tabs" id="navTabs">
+    <button class="nav-tab active" onclick="showView('admin')">Admin</button>
+    <button class="nav-tab" onclick="showView('demo')">Client Demo</button>
+  </nav>
+</header>
+
+<div class="toast" id="toast"></div>
+
+<!-- ADMIN -->
+<div class="view active" id="view-admin">
+  <div class="admin-layout">
+    <div class="section-title">Add New Client</div>
+    <p class="section-sub">Create a client record and generate their unique check-in QR code</p>
+    <div class="card">
+      <div class="form-grid">
+        <div class="form-group"><label>First Name</label><input type="text" id="inp-first" placeholder="e.g. Anton"></div>
+        <div class="form-group"><label>Family Name</label><input type="text" id="inp-last" placeholder="e.g. Smith"></div>
+        <div class="form-group"><label>Time Zone</label>
+          <select id="inp-tz">
+            <option value="Pacific/Auckland">NZ &mdash; Auckland</option>
+            <option value="Pacific/Chatham">NZ &mdash; Chatham Islands</option>
+            <option value="Australia/Sydney">AU &mdash; Sydney</option>
+            <option value="Australia/Melbourne">AU &mdash; Melbourne</option>
+            <option value="Australia/Brisbane">AU &mdash; Brisbane</option>
+            <option value="Australia/Perth">AU &mdash; Perth</option>
+            <option value="America/Los_Angeles">US &mdash; Los Angeles</option>
+            <option value="America/New_York">US &mdash; New York</option>
+            <option value="Europe/London">UK &mdash; London</option>
+          </select>
+        </div>
+        <div class="form-group"><label>&nbsp;</label><button class="btn btn-teal" onclick="addClient()">+ Add Client</button></div>
+      </div>
+    </div>
+
+    <div class="section-title">All Clients</div>
+    <p class="section-sub">Sorted by Morning Marine Score &mdash; highest to lowest</p>
+    <div class="card" style="padding:0;overflow:hidden">
+      <table class="client-table">
+        <thead><tr><th>Client</th><th>Check-ins</th><th>Streak</th><th>MM Score</th><th>URL</th><th>Actions</th></tr></thead>
+        <tbody id="clientTableBody">
+          <tr><td colspan="6"><div class="loading"><div class="spinner"></div><br>Loading...</div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- DEMO -->
+<div class="view" id="view-demo">
+  <div class="admin-layout">
+    <div class="section-title">Client Page Preview</div>
+    <p class="section-sub">Select a client to preview their personal check-in page</p>
+    <div class="card" id="demoList"><div class="loading"><div class="spinner"></div></div></div>
+  </div>
+</div>
+
+<!-- CLIENT -->
+<div class="view" id="view-client">
+  <div class="client-page">
+    <div class="client-inner" id="clientInner">
+      <div class="loading"><div class="spinner"></div><br>Loading your page...</div>
+    </div>
+  </div>
+</div>
+
+<!-- QR MODAL -->
+<div class="modal-overlay" id="qrModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeQR()">&#x2715;</button>
+    <div class="modal-name" id="qrClientName"></div>
+    <div class="modal-sub">Morning Marine Routine</div>
+    <div class="modal-url" id="qrClientUrl"></div>
+    <div id="qrCanvas" style="display:flex;justify-content:center;margin:4px 0"></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="copyQRUrl()">Copy URL</button>
+      <button class="btn btn-teal" onclick="printQR()">Print / Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- QR ENCODER (self-contained) -->
+<script>
+var QRMaker=(function(){
+  var EX=new Uint8Array(512),LG=new Uint8Array(256);
+  (function(){var x=1;for(var i=0;i<255;i++){EX[i]=x;LG[x]=i;x<<=1;if(x&256)x^=285;}for(var i=255;i<512;i++)EX[i]=EX[i-255];})();
+  function mul(a,b){return(a&&b)?EX[LG[a]+LG[b]]:0;}
+  function gp(d){var p=[1];for(var i=0;i<d;i++){var q=[1,EX[i]],r=new Array(p.length+1).fill(0);for(var a=0;a<p.length;a++)for(var b=0;b<q.length;b++)r[a+b]^=mul(p[a],q[b]);p=r;}return p;}
+  function rs(data,ec){var g=gp(ec),r=new Uint8Array(data.length+ec);for(var i=0;i<data.length;i++)r[i]=data[i];for(var i=0;i<data.length;i++){var c=r[i];if(c)for(var j=0;j<g.length;j++)r[i+j]^=mul(g[j],c);}return r.slice(data.length);}
+  var CAP=[0,16,28,44,64,86,108,124];
+  function gv(n){for(var v=1;v<=7;v++)if(n<=CAP[v])return v;return 7;}
+  var EB=[null,[[1,19,16]],[[1,34,28]],[[1,55,44]],[[2,32,24]],[[2,43,33]],[[4,27,20]],[[4,31,23]]];
+  function BB(){this.b=[];this.n=0;}
+  BB.prototype.add=function(v,bits){for(var i=bits-1;i>=0;i--){var idx=this.n>>3;if(idx>=this.b.length)this.b.push(0);if((v>>i)&1)this.b[idx]|=(128>>(this.n&7));this.n++;}};
+  BB.prototype.arr=function(){return new Uint8Array(this.b);};
+  function bdata(text,ver){var by=[];for(var i=0;i<text.length;i++)by.push(text.charCodeAt(i)&255);var tot=0;for(var bl of EB[ver])tot+=bl[0]*bl[2];var buf=new BB();buf.add(4,4);buf.add(by.length,8);for(var b of by)buf.add(b,8);buf.add(0,4);while(buf.n%8)buf.add(0,1);var arr=buf.arr(),out=new Uint8Array(tot);out.set(arr.slice(0,tot));var pad=[0xEC,0x11],pi=0;for(var i=arr.length;i<tot;i++)out[i]=pad[pi++%2];return out;}
+  function ilv(data,ver){var gr=[],off=0;for(var[cnt,tot,dc]of EB[ver]){var ec=tot-dc;for(var i=0;i<cnt;i++){var d=data.slice(off,off+dc);off+=dc;gr.push({d,e:rs(d,ec)});}}var out=[];var mx=Math.max(...gr.map(g=>g.d.length));for(var i=0;i<mx;i++)for(var g of gr)if(i<g.d.length)out.push(g.d[i]);for(var i=0;i<gr[0].e.length;i++)for(var g of gr)out.push(g.e[i]);return new Uint8Array(out);}
+  function nm(sz){return Array.from({length:sz},()=>new Int8Array(sz).fill(-1));}
+  function fin(m,r,c){for(var i=0;i<7;i++)for(var j=0;j<7;j++)m[r+i][c+j]=(i===0||i===6||j===0||j===6||(i>=2&&i<=4&&j>=2&&j<=4))?1:0;var sz=m.length;for(var i=-1;i<=7;i++){if(r+i>=0&&r+i<sz){if(c-1>=0)m[r+i][c-1]=0;if(c+7<sz)m[r+i][c+7]=0;}if(c+i>=0&&c+i<sz){if(r-1>=0)m[r-1][c+i]=0;if(r+7<sz)m[r+7][c+i]=0;}}}
+  function tim(m,sz){for(var i=8;i<sz-8;i++)m[6][i]=m[i][6]=i%2?0:1;}
+  function fmt(m,mask,sz){var raw=(0b101<<3)|mask,g=0b10100110111,tmp=raw;for(var i=14;i>=10;i--)if((tmp>>i)&1)tmp^=g<<(i-10);var fb=((raw<<10)^tmp)^0b101010000010010,bits=[];for(var i=14;i>=0;i--)bits.push((fb>>i)&1);var p1=[[8,0],[8,1],[8,2],[8,3],[8,4],[8,5],[8,7],[8,8],[7,8],[5,8],[4,8],[3,8],[2,8],[1,8],[0,8]],p2=[[sz-1,8],[sz-2,8],[sz-3,8],[sz-4,8],[sz-5,8],[sz-6,8],[sz-7,8],[8,sz-8],[8,sz-7],[8,sz-6],[8,sz-5],[8,sz-4],[8,sz-3],[8,sz-2],[8,sz-1]];for(var i=0;i<15;i++){m[p1[i][0]][p1[i][1]]=bits[i];m[p2[i][0]][p2[i][1]]=bits[i];}m[sz-8][8]=1;}
+  function pd(m,cw,sz){var bi=0,bit=7,col=sz-1;while(col>0){if(col===6)col--;for(var i=0;i<sz;i++){var row=(col%4<2)?(sz-1-i):i;for(var dx=0;dx<2;dx++){var c=col-dx;if(m[row][c]===-1){m[row][c]=bi<cw.length?((cw[bi]>>bit)&1):0;if(bit===0){bit=7;bi++;}else bit--;}}}col-=2;}}
+  function am(m,mask,sz){for(var r=0;r<sz;r++)for(var c=0;c<sz;c++)if(m[r][c]>=0){var f=(mask===0?(r+c)%2===0:mask===1?r%2===0:mask===2?c%3===0:mask===3?(r+c)%3===0:mask===4?(Math.floor(r/2)+Math.floor(c/3))%2===0:mask===5?(r*c)%2+(r*c)%3===0:mask===6?((r*c)%2+(r*c)%3)%2===0:((r+c)%2+(r*c)%3)%2===0);if(f)m[r][c]^=1;}}
+  function gen(text){var ver=gv(text.length),sz=ver*4+17,m=nm(sz);fin(m,0,0);fin(m,0,sz-7);fin(m,sz-7,0);tim(m,sz);m[sz-8][8]=1;fmt(m,0,sz);pd(m,ilv(bdata(text,ver),ver),sz);am(m,0,sz);fmt(m,0,sz);return{matrix:m,size:sz};}
+  return{toCanvas:function(text,size,dark,light){var qr=gen(text),cv=document.createElement('canvas'),mg=6,mod=(size-mg*2)/qr.size;cv.width=size;cv.height=size;var ctx=cv.getContext('2d');ctx.fillStyle=light||'#ffffff';ctx.fillRect(0,0,size,size);ctx.fillStyle=dark||'#1a3a4a';for(var r=0;r<qr.size;r++)for(var c=0;c<qr.size;c++)if(qr.matrix[r][c]===1)ctx.fillRect(Math.floor(mg+c*mod),Math.floor(mg+r*mod),Math.ceil(mod),Math.ceil(mod));return cv;}};
+})();
+</script>
+
+<!-- MAIN APP -->
+<script>
+var SB_URL = 'https://qfpwdlpcjxjjmfyxhwnj.supabase.co';
+var SB_KEY = 'sb_publishable_qtArYvrIX3Ci3sim-8V4_Q_TXFYlX3y';
+var APP_URL = 'https://faqtotum24.github.io/morning-marine-routine/';
+
+async function sb(path, method, body){
+  var opts={method:method||'GET',headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json','Prefer':'return=representation'}};
+  if(body)opts.body=JSON.stringify(body);
+  var res=await fetch(SB_URL+'/rest/v1/'+path,opts);
+  if(res.status===204)return null;
+  var json=await res.json();
+  if(!res.ok)throw new Error(json.message||json.error||JSON.stringify(json));
+  return json;
+}
+
+function genTok(){var a=new Uint8Array(16);crypto.getRandomValues(a);return Array.from(a,b=>b.toString(16).padStart(2,'0')).join('');}
+function todayStr(tz){return new Date().toLocaleDateString('en-CA',{timeZone:tz});}
+function dateFmt(tz){return new Date().toLocaleDateString('en-NZ',{timeZone:tz,weekday:'long',year:'numeric',month:'long',day:'numeric'});}
+function timeFmt(tz){return new Date().toLocaleTimeString('en-NZ',{timeZone:tz,hour:'2-digit',minute:'2-digit'});}
+function clientURL(token){return APP_URL+'?client='+token;}
+
+function computeStats(dates,tz){
+  dates=[...new Set(dates)].sort();
+  var today=todayStr(tz),yest=new Date(Date.now()-86400000).toLocaleDateString('en-CA',{timeZone:tz});
+  var streak=0,anchor=dates.includes(today)?today:yest,cur=new Date(anchor);
+  while(true){var ds=cur.toLocaleDateString('en-CA',{timeZone:tz});if(dates.includes(ds)){streak++;cur=new Date(cur-86400000);}else break;}
+  var last30=[],now=Date.now();for(var i=0;i<30;i++)last30.push(new Date(now-i*86400000).toLocaleDateString('en-CA',{timeZone:tz}));
+  return{total:dates.length,streak,mmScore:Math.round(last30.filter(d=>dates.includes(d)).length/30*100),checkedToday:dates.includes(today)};
+}
+
+function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
+
+async function addClient(){
+  var f=document.getElementById('inp-first').value.trim();
+  var l=document.getElementById('inp-last').value.trim();
+  var tz=document.getElementById('inp-tz').value;
+  if(!f||!l){showToast('Please enter first and last name');return;}
+  try{
+    await sb('clients','POST',{first_name:f,family_name:l,tz,token:genTok()});
+    document.getElementById('inp-first').value='';
+    document.getElementById('inp-last').value='';
+    showToast(f+' '+l+' added!');
+    renderTable();
+  }catch(e){showToast('Error: '+e.message);}
+}
+
+async function renderTable(){
+  var tbody=document.getElementById('clientTableBody');
+  tbody.innerHTML='<tr><td colspan="6"><div class="loading"><div class="spinner"></div><br>Loading...</div></td></tr>';
+  try{
+    var clients=await sb('clients?select=*&order=created_at.asc');
+    if(!clients||!clients.length){
+      tbody.innerHTML='<tr><td colspan="6"><div class="empty-state"><span class="icon">🌊</span>No clients yet &mdash; add your first one above</div></td></tr>';
+      return;
+    }
+    var allCI=await sb('checkins?select=client_id,check_in_date');
+    var rows=clients.map(c=>{
+      var dates=(allCI||[]).filter(ci=>ci.client_id===c.id).map(ci=>ci.check_in_date);
+      return{...c,s:computeStats(dates,c.tz)};
+    }).sort((a,b)=>b.s.mmScore-a.s.mmScore);
+
+    tbody.innerHTML=rows.map(c=>{
+      var url=clientURL(c.token),sc=c.s.mmScore;
+      var bc=sc>=70?'high':sc>=40?'mid':'low';
+      return'<tr>'+
+        '<td><strong>'+c.first_name+' '+c.family_name+'</strong><br><small style="color:var(--mid-grey);font-size:0.72rem">'+c.tz+'</small></td>'+
+        '<td style="font-family:Arial Black,sans-serif;font-size:1.3rem;color:var(--teal)">'+c.s.total+'</td>'+
+        '<td style="font-family:Arial Black,sans-serif;font-size:1.3rem;color:var(--navy)">'+c.s.streak+' &#x1F525;</td>'+
+        '<td><span class="score-badge '+bc+'">'+sc+'%</span></td>'+
+        '<td><span class="url-text" title="'+url+'">'+url+'</span></td>'+
+        '<td><div class="action-btns">'+
+          '<button class="mini-btn" onclick="copyURL(\''+url+'\',this)">Copy</button>'+
+          '<button class="mini-btn" onclick="showQR(\''+c.token+'\',\''+c.first_name+' '+c.family_name+'\')">QR Code</button>'+
+        '</div></td></tr>';
+    }).join('');
+  }catch(e){tbody.innerHTML='<tr><td colspan="6"><div class="empty-state">Error: '+e.message+'</div></td></tr>';}
+}
+
+async function renderDemoList(){
+  var el=document.getElementById('demoList');
+  el.innerHTML='<div class="loading"><div class="spinner"></div></div>';
+  try{
+    var clients=await sb('clients?select=*&order=created_at.asc');
+    if(!clients||!clients.length){el.innerHTML='<div class="empty-state"><span class="icon">🌊</span>Add clients in the Admin tab first</div>';return;}
+    el.innerHTML='<p style="color:var(--mid-grey);font-size:0.82rem;margin-bottom:16px">Click a client to preview their check-in page:</p>'+
+      clients.map(c=>'<button class="btn btn-ghost" style="display:block;width:100%;text-align:left;margin-bottom:8px;padding:12px 18px;border-radius:10px" onclick="loadClientPage(\''+c.token+'\');showView(\'client\')">'+
+        c.first_name+' '+c.family_name+'<span style="color:var(--mid-grey);font-size:0.75rem;float:right">'+c.tz+'</span></button>').join('');
+  }catch(e){el.innerHTML='<div class="empty-state">Error: '+e.message+'</div>';}
+}
+
+function copyURL(url,btn){
+  navigator.clipboard.writeText(url).then(()=>{
+    btn.textContent='\u2713 Copied';btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},2000);
+  });
+}
+
+var _qrUrl='';
+function showQR(token,name){
+  var url=clientURL(token);_qrUrl=url;
+  document.getElementById('qrClientName').textContent=name;
+  document.getElementById('qrClientUrl').textContent=url;
+  var wrap=document.getElementById('qrCanvas');wrap.innerHTML='';
+  wrap.appendChild(QRMaker.toCanvas(url,220,'#1a3a4a','#ffffff'));
+  document.getElementById('qrModal').classList.add('open');
+}
+function closeQR(){document.getElementById('qrModal').classList.remove('open');}
+function copyQRUrl(){navigator.clipboard.writeText(_qrUrl).then(()=>showToast('URL copied!'));}
+function printQR(){
+  var name=document.getElementById('qrClientName').textContent,cv=document.querySelector('#qrCanvas canvas');
+  if(!cv)return;
+  var src=cv.toDataURL(),w=window.open('','_blank');
+  w.document.write('<html><head><title>QR \u2014 '+name+'</title><style>body{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;margin:0;font-family:sans-serif;background:#f7fbfc}h2{color:#2a9d8f;letter-spacing:3px;font-size:0.85rem;text-transform:uppercase;margin-bottom:4px}h3{color:#1a3a4a;margin-bottom:20px;font-size:1.2rem}img{width:260px;height:260px;border:1px solid #d0e8ec;border-radius:8px;padding:8px;background:white}p{margin-top:12px;font-size:0.65rem;color:#7a9aaa;word-break:break-all;max-width:280px;text-align:center}</style></head><body>');
+  w.document.write('<h2>Morning Marine Routine</h2><h3>'+name+'</h3><img src="'+src+'"><p>'+_qrUrl+'</p><script>window.onload=function(){window.print();}<\/script></body></html>');
+  w.document.close();
+}
+
+async function loadClientPage(token){
+  var inner=document.getElementById('clientInner');
+  document.getElementById('siteHeader').style.display='none';
+  inner.innerHTML='<div class="loading"><div class="spinner"></div><br>Loading your page...</div>';
+  try{
+    var clients=await sb('clients?token=eq.'+token+'&limit=1');
+    if(!clients||!clients.length){
+      inner.innerHTML='<div class="not-found"><h2>404</h2><p>This check-in link is not valid.<br>Please check your QR code.</p></div>';
+      return;
+    }
+    var client=clients[0];
+    var checkins=await sb('checkins?client_id=eq.'+client.id+'&select=check_in_date');
+    var dates=(checkins||[]).map(c=>c.check_in_date);
+    var s=computeStats(dates,client.tz);
+    var quotes=await sb('quotes?active=eq.true&select=quote_text,author');
+    var q=(quotes&&quotes.length)?quotes[Math.floor(Math.random()*quotes.length)]:{quote_text:'Keep going.',author:'Morning Marine'};
+
+    inner.innerHTML=
+      '<div class="client-header">'+
+        '<span class="client-logo">Oceanz Vital</span>'+
+        '<div class="client-greeting">Good Morning,<br><span>'+client.first_name+'</span></div>'+
+        '<div class="wave-divider"></div>'+
+        '<div class="client-date">'+dateFmt(client.tz)+'</div>'+
+        '<div class="client-date" style="margin-top:4px;font-size:0.75rem">'+timeFmt(client.tz)+'</div>'+
+      '</div>'+
+      '<div class="checkin-wrap">'+
+        '<button class="checkin-btn'+(s.checkedToday?' done':'')+'" id="checkinBtn" onclick="doCheckin(\''+client.id+'\',\''+client.tz+'\')"'+(s.checkedToday?' disabled':'')+'>'+
+          (s.checkedToday?'&#10003; Checked In Today':'Check In')+
+        '</button>'+
+        '<div class="checkin-status'+(s.checkedToday?' ok':'')+'" id="checkinStatus">'+(s.checkedToday?'Great work \u2014 you\'ve already checked in today!':'')+'</div>'+
+      '</div>'+
+      '<div class="stats-grid">'+
+        '<div class="stat-card"><div class="stat-label">Total Check-ins</div><div class="stat-value teal" id="statTotal">'+s.total+'</div></div>'+
+        '<div class="stat-card"><div class="stat-label">Day Streak &#x1F525;</div><div class="stat-value" id="statStreak">'+s.streak+'</div></div>'+
+        '<div class="stat-card highlight"><div class="stat-label">Morning Marine Score</div><div class="stat-value" id="statScore">'+s.mmScore+'%</div><div class="stat-note">% of last 30 days</div></div>'+
+      '</div>'+
+      '<div class="quote-card"><div class="quote-text">&#8220;'+q.quote_text+'&#8221;</div><div class="quote-author">\u2014 '+q.author+'</div></div>';
+  }catch(e){
+    inner.innerHTML='<div class="not-found"><h2>Error</h2><p>'+e.message+'</p></div>';
+  }
+}
+
+async function doCheckin(clientId,tz){
+  try{
+    await sb('checkins','POST',{client_id:clientId,check_in_date:todayStr(tz)});
+    var checkins=await sb('checkins?client_id=eq.'+clientId+'&select=check_in_date');
+    var s=computeStats((checkins||[]).map(c=>c.check_in_date),tz);
+    document.getElementById('checkinBtn').innerHTML='&#10003; Checked In Today';
+    document.getElementById('checkinBtn').className='checkin-btn done';
+    document.getElementById('checkinBtn').disabled=true;
+    document.getElementById('checkinStatus').textContent='Great work \u2014 you\'ve already checked in today!';
+    document.getElementById('checkinStatus').className='checkin-status ok';
+    document.getElementById('statTotal').textContent=s.total;
+    document.getElementById('statStreak').textContent=s.streak;
+    document.getElementById('statScore').textContent=s.mmScore+'%';
+    showToast('Check-in recorded! \uD83D\uDCAA');
+  }catch(e){
+    if(e.message.includes('duplicate')||e.message.includes('unique')||e.message.includes('23505')){
+      showToast('Already checked in today!');
+    }else{showToast('Error: '+e.message);}
+  }
+}
+
+function showView(name){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('view-'+name).classList.add('active');
+  document.getElementById('siteHeader').style.display='';
+  document.querySelectorAll('.nav-tab').forEach(t=>{if(t.textContent.toLowerCase().includes(name==='admin'?'admin':'demo'))t.classList.add('active');});
+  if(name==='admin')renderTable();
+  if(name==='demo')renderDemoList();
+}
+
+(function(){
+  var token=new URLSearchParams(window.location.search).get('client');
+  if(token){
+    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+    document.getElementById('view-client').classList.add('active');
+    document.getElementById('navTabs').style.display='none';
+    loadClientPage(token);
+  }else{
+    renderTable();
+  }
+})();
+</script>
+</body>
+</html>
