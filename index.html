@@ -6,7 +6,6 @@
 <title>Morning Marine Routine</title>
 <style>
   :root {
-    /* Oceanz Vital palette */
     --teal:       #2a9d8f;
     --teal-light: #4dbfb3;
     --teal-pale:  #e8f7f6;
@@ -29,14 +28,7 @@
   body { font-family: 'Trebuchet MS','Segoe UI',sans-serif; background: var(--off-white); color: var(--text); min-height: 100vh; }
 
   /* ── HEADER ── */
-  .site-header {
-    background: var(--white);
-    border-bottom: 2px solid var(--teal);
-    padding: 14px 28px;
-    display: flex; align-items: center; justify-content: space-between;
-    position: sticky; top: 0; z-index: 100;
-    box-shadow: 0 2px 12px rgba(42,157,143,.08);
-  }
+  .site-header { background: var(--white); border-bottom: 2px solid var(--teal); padding: 14px 28px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(42,157,143,.08); }
   .brand { font-family: 'Arial Black',Impact,sans-serif; font-size: 1.2rem; letter-spacing: 2px; color: var(--teal); }
   .brand span { color: var(--navy); }
   .nav-tabs { display: flex; gap: 4px; }
@@ -49,8 +41,6 @@
   .admin-layout { max-width: 1100px; margin: 0 auto; padding: 36px 24px; }
   .section-title { font-family: 'Arial Black',Impact,sans-serif; font-size: 1.3rem; letter-spacing: 2px; color: var(--navy); margin-bottom: 4px; }
   .section-sub { color: var(--mid-grey); font-size: 0.82rem; letter-spacing: 0.5px; margin-bottom: 20px; }
-
-  /* ── CARDS ── */
   .card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 28px; box-shadow: 0 2px 16px rgba(42,157,143,.06); }
 
   /* ── FORM ── */
@@ -62,20 +52,18 @@
 
   /* ── BUTTONS ── */
   .btn { padding: 10px 22px; border: none; border-radius: 8px; font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all .2s; white-space: nowrap; font-weight: 700; }
-  .btn-teal { background: var(--teal); color: var(--white); } .btn-teal:hover { background: var(--teal-light); transform: translateY(-1px); }
+  .btn-teal  { background: var(--teal); color: var(--white); } .btn-teal:hover  { background: var(--teal-light); transform: translateY(-1px); }
   .btn-ghost { background: transparent; border: 1.5px solid var(--border); color: var(--text-soft); } .btn-ghost:hover { border-color: var(--teal); color: var(--teal); background: var(--teal-pale); }
-  .btn-gold { background: var(--gold); color: var(--white); } .btn-gold:hover { background: var(--gold-light); }
 
   /* ── TABLE ── */
   .client-table { width: 100%; border-collapse: collapse; }
   .client-table th { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--teal); padding: 12px 16px; text-align: left; border-bottom: 2px solid var(--border); background: var(--teal-pale); }
-  .client-table th:first-child { border-radius: 0; }
-  .client-table td { padding: 14px 16px; font-size: 0.88rem; border-bottom: 1px solid var(--light-grey); vertical-align: middle; color: var(--text); }
+  .client-table td { padding: 14px 16px; font-size: 0.88rem; border-bottom: 1px solid var(--light-grey); vertical-align: middle; }
   .client-table tr:last-child td { border-bottom: none; }
   .client-table tr:hover td { background: var(--off-white); }
   .score-badge { display: inline-block; font-weight: 700; font-size: 0.78rem; padding: 4px 12px; border-radius: 20px; }
-  .score-badge.high { background: var(--teal-pale); color: var(--teal); border: 1px solid var(--teal-light); }
-  .score-badge.mid  { background: var(--gold-pale);  color: var(--gold);  border: 1px solid var(--gold-light); }
+  .score-badge.high { background: var(--teal-pale);  color: var(--teal); border: 1px solid var(--teal-light); }
+  .score-badge.mid  { background: var(--gold-pale);  color: var(--gold); border: 1px solid var(--gold-light); }
   .score-badge.low  { background: var(--light-grey); color: var(--mid-grey); border: 1px solid var(--border); }
   .url-text { font-size: 0.72rem; color: var(--mid-grey); max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block; }
   .action-btns { display: flex; gap: 6px; }
@@ -92,70 +80,31 @@
   .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(26,58,74,.5); z-index: 200; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
   .modal-overlay.open { display: flex; }
   .modal-box { background: var(--white); border: 1px solid var(--border); border-top: 4px solid var(--teal); border-radius: 16px; padding: 36px 32px; max-width: 340px; width: 92%; text-align: center; position: relative; box-shadow: 0 20px 60px rgba(26,58,74,.15); }
-  .modal-close { position: absolute; top: 14px; right: 18px; background: none; border: none; color: var(--mid-grey); font-size: 1.3rem; cursor: pointer; } .modal-close:hover { color: var(--text); }
+  .modal-close { position: absolute; top: 14px; right: 18px; background: none; border: none; color: var(--mid-grey); font-size: 1.3rem; cursor: pointer; }
   .modal-name { font-family: 'Arial Black',Impact,sans-serif; font-size: 1.1rem; letter-spacing: 2px; color: var(--navy); margin-bottom: 4px; text-transform: uppercase; }
-  .modal-sub { font-size: 0.75rem; color: var(--teal); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; }
-  .modal-url { font-size: 0.65rem; color: var(--mid-grey); word-break: break-all; margin-bottom: 16px; font-family: monospace; background: var(--light-grey); padding: 8px; border-radius: 6px; }
+  .modal-sub  { font-size: 0.75rem; color: var(--teal); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; }
+  .modal-url  { font-size: 0.65rem; color: var(--mid-grey); word-break: break-all; margin-bottom: 16px; font-family: monospace; background: var(--light-grey); padding: 8px; border-radius: 6px; }
   .modal-actions { margin-top: 16px; display: flex; gap: 10px; justify-content: center; }
 
-  /* ── CLIENT PAGE ── */
+  /* ══════════════════════════════════
+     CLIENT PAGE
+  ══════════════════════════════════ */
   .client-page {
     min-height: 100vh;
     background: linear-gradient(170deg, #e8f7f6 0%, #c8eae8 20%, #eaf6fb 50%, #f7fbfc 80%, #ffffff 100%);
   }
   .client-inner { max-width: 440px; margin: 0 auto; padding: 48px 24px 72px; }
-
   .client-header { text-align: center; margin-bottom: 32px; }
-  .client-logo {
-    display: inline-block;
-    font-size: 0.68rem; letter-spacing: 5px; text-transform: uppercase;
-    color: var(--teal); font-weight: 700;
-    margin-bottom: 24px;
-    padding: 6px 16px;
-    border: 1px solid var(--teal-light);
-    border-radius: 20px;
-    background: var(--white);
-  }
+  .client-logo { display: inline-block; font-size: 0.68rem; letter-spacing: 5px; text-transform: uppercase; color: var(--teal); font-weight: 700; margin-bottom: 24px; padding: 6px 16px; border: 1px solid var(--teal-light); border-radius: 20px; background: var(--white); }
   .client-greeting { font-family: 'Arial Black',Impact,sans-serif; font-size: 2.6rem; line-height: 1.1; color: var(--navy); margin-bottom: 8px; }
   .client-greeting span { color: var(--teal); }
   .client-date { color: var(--mid-grey); font-size: 0.82rem; letter-spacing: 1.5px; text-transform: uppercase; }
-
-  /* check-in button */
-  .checkin-wrap { margin: 32px 0 28px; }
-  .checkin-btn {
-    display: block; width: 100%;
-    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
-    color: var(--white);
-    font-family: 'Arial Black',Impact,sans-serif;
-    font-size: 1.3rem; letter-spacing: 3px;
-    padding: 20px; border-radius: 12px; border: none; cursor: pointer;
-    box-shadow: 0 6px 28px rgba(42,157,143,.35);
-    transition: all .2s;
-  }
-  .checkin-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(42,157,143,.45); }
-  .checkin-btn.done {
-    background: linear-gradient(135deg, #e8f7f6 0%, #d0eeeb 100%);
-    color: var(--teal); box-shadow: none; cursor: default;
-    border: 2px solid var(--teal-light);
-  }
-  .checkin-btn.done:hover { transform: none; }
-  .checkin-status { margin-top: 10px; font-size: 0.8rem; color: var(--mid-grey); min-height: 18px; text-align: center; }
-  .checkin-status.ok { color: var(--teal); font-weight: 600; }
+  .wave-divider { width: 60px; height: 3px; background: linear-gradient(90deg,var(--teal),var(--teal-light)); border-radius: 2px; margin: 16px auto; }
 
   /* stats */
-  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
-  .stat-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 12px; padding: 20px 16px; text-align: center;
-    box-shadow: 0 2px 12px rgba(42,157,143,.06);
-  }
-  .stat-card.highlight {
-    grid-column: 1/-1;
-    background: linear-gradient(135deg, var(--teal) 0%, var(--navy-soft) 100%);
-    border: none;
-    box-shadow: 0 6px 24px rgba(42,157,143,.25);
-  }
+  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  .stat-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 20px 16px; text-align: center; box-shadow: 0 2px 12px rgba(42,157,143,.06); }
+  .stat-card.highlight { grid-column: 1/-1; background: linear-gradient(135deg,var(--teal) 0%,var(--navy-soft) 100%); border: none; box-shadow: 0 6px 24px rgba(42,157,143,.25); }
   .stat-label { font-size: 0.66rem; letter-spacing: 2px; text-transform: uppercase; color: var(--mid-grey); margin-bottom: 8px; font-weight: 600; }
   .stat-card.highlight .stat-label { color: rgba(255,255,255,.7); }
   .stat-value { font-family: 'Arial Black',Impact,sans-serif; font-size: 2.8rem; line-height: 1; color: var(--navy); }
@@ -164,34 +113,260 @@
   .stat-note { font-size: 0.7rem; color: var(--mid-grey); margin-top: 6px; }
   .stat-card.highlight .stat-note { color: rgba(255,255,255,.6); }
 
-  /* quote */
-  .quote-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-left: 4px solid var(--gold);
-    border-radius: 0 12px 12px 0;
-    padding: 20px 20px 20px 22px;
-    box-shadow: 0 2px 12px rgba(201,168,76,.08);
-  }
-  .quote-text { font-style: italic; font-size: 0.92rem; line-height: 1.65; color: var(--text-soft); margin-bottom: 10px; }
-  .quote-author { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+  /* ── CHECK-IN ZONE ── */
+  .checkin-zone { position: relative; min-height: 180px; margin-bottom: 16px; }
 
-  .not-found { text-align: center; padding: 80px 20px; color: var(--mid-grey); }
-  .not-found h2 { font-family: 'Arial Black',Impact,sans-serif; font-size: 3rem; color: var(--border); letter-spacing: 4px; margin-bottom: 12px; }
-  .not-found p { color: var(--mid-grey); }
+  /* the check-in button */
+  .checkin-btn {
+    display: block; width: 100%;
+    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-light) 100%);
+    color: var(--white);
+    font-family: 'Arial Black',Impact,sans-serif;
+    font-size: 1.3rem; letter-spacing: 3px;
+    padding: 22px; border-radius: 12px; border: none; cursor: pointer;
+    box-shadow: 0 6px 28px rgba(42,157,143,.35);
+    transition: transform .2s, box-shadow .2s, background .6s, opacity .6s;
+    position: relative;
+  }
+  .checkin-btn:hover:not(.done):not(.success) { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(42,157,143,.45); }
+  .checkin-btn.success {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    box-shadow: 0 6px 28px rgba(39,174,96,.4);
+    cursor: default;
+  }
+  .checkin-btn.fading { opacity: 0; transform: scale(0.96); pointer-events: none; }
+  .checkin-btn.hidden { display: none; }
+
+  /* already-done state (page loaded after prior check-in) */
+  .already-done-msg {
+    background: var(--teal-pale); border: 1.5px solid var(--teal-light);
+    border-radius: 12px; padding: 18px 20px; text-align: center;
+    color: var(--teal); font-size: 0.9rem; font-weight: 600; letter-spacing: 0.5px;
+  }
+
+  /* quote reward — fades in */
+  .quote-reward {
+    display: none;
+    opacity: 0;
+    transition: opacity .8s ease;
+    text-align: center;
+  }
+  .quote-reward.visible { display: block; }
+  .quote-reward.shown   { opacity: 1; }
+  .quote-reward-icon { font-size: 2rem; margin-bottom: 12px; }
+  .quote-reward-text { font-style: italic; font-size: 1.05rem; line-height: 1.65; color: var(--text); margin-bottom: 10px; }
+  .quote-reward-author { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 28px; }
+
+  /* Go Get Em button */
+  .gogetem-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    color: var(--white);
+    font-family: 'Arial Black',Impact,sans-serif;
+    font-size: 1rem; letter-spacing: 3px;
+    padding: 16px 36px; border-radius: 30px; border: none; cursor: pointer;
+    box-shadow: 0 6px 24px rgba(201,168,76,.35);
+    transition: all .2s;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity .6s ease, transform .6s ease, background .2s, box-shadow .2s;
+  }
+  .gogetem-btn.shown { opacity: 1; transform: translateY(0); }
+  .gogetem-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(201,168,76,.5); }
+
+  /* ══════════════════════════════════
+     FAREWELL OCEAN SCREEN
+  ══════════════════════════════════ */
+  .farewell-overlay {
+    position: fixed; inset: 0; z-index: 300;
+    opacity: 0; pointer-events: none;
+    transition: opacity 1.2s ease;
+    overflow: hidden;
+  }
+  .farewell-overlay.active { opacity: 1; pointer-events: all; }
+
+  /* sky */
+  .farewell-sky {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg,
+      #a8d8ea 0%,
+      #c9eaf5 25%,
+      #e8f7fb 45%,
+      #f0fbff 55%,
+      #d4eeee 65%,
+      #5bb3b0 80%,
+      #2a9d8f 100%
+    );
+  }
+
+  /* sun */
+  .farewell-sun {
+    position: absolute; top: 10%; left: 50%; transform: translateX(-50%);
+    width: 80px; height: 80px;
+    background: radial-gradient(circle, #fff8e7 0%, #ffe082 40%, #ffca28 70%, transparent 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 60px 20px rgba(255,224,130,.4), 0 0 120px 60px rgba(255,224,130,.15);
+  }
+
+  /* horizon glow */
+  .farewell-horizon {
+    position: absolute; bottom: 40%; left: 0; right: 0; height: 80px;
+    background: linear-gradient(180deg, transparent, rgba(255,255,255,.15), transparent);
+  }
+
+  /* ocean body */
+  .farewell-ocean {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 42%;
+    background: linear-gradient(180deg, #2a9d8f 0%, #1a7a72 40%, #0f5c55 100%);
+    overflow: hidden;
+  }
+
+  /* shimmer lines on water */
+  .farewell-shimmer {
+    position: absolute; top: 15%; left: -20%; right: -20%;
+    height: 3px; background: rgba(255,255,255,.18); border-radius: 50%;
+    animation: shimmer 4s ease-in-out infinite;
+  }
+  .farewell-shimmer:nth-child(2) { top: 30%; animation-delay: .8s; animation-duration: 5s; height: 2px; opacity: .7; }
+  .farewell-shimmer:nth-child(3) { top: 50%; animation-delay: 1.6s; animation-duration: 3.5s; }
+  .farewell-shimmer:nth-child(4) { top: 65%; animation-delay: .4s; animation-duration: 6s; height: 2px; opacity: .5; }
+  .farewell-shimmer:nth-child(5) { top: 80%; animation-delay: 2s; animation-duration: 4.5s; }
+  @keyframes shimmer {
+    0%,100% { transform: scaleX(.6) translateX(-5%); opacity: .3; }
+    50%      { transform: scaleX(1.1) translateX(3%); opacity: .9; }
+  }
+
+  /* wave layers */
+  .farewell-waves {
+    position: absolute; bottom: 0; left: 0; right: 0; height: 100%;
+  }
+  .wave {
+    position: absolute; bottom: 0; left: -100%; right: -100%;
+    height: 60px;
+    background: inherit;
+    border-radius: 40%;
+    opacity: .6;
+  }
+  .wave1 {
+    background: rgba(255,255,255,.12);
+    height: 50px; bottom: 55%;
+    animation: wave 8s linear infinite;
+  }
+  .wave2 {
+    background: rgba(255,255,255,.10);
+    height: 40px; bottom: 48%;
+    animation: wave 11s linear infinite reverse;
+  }
+  .wave3 {
+    background: rgba(255,255,255,.08);
+    height: 35px; bottom: 42%;
+    animation: wave 14s linear infinite;
+  }
+  @keyframes wave {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* beach strip */
+  .farewell-beach {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 12%;
+    background: linear-gradient(180deg, #c8b89a 0%, #e2d5bc 60%, #f0e8d5 100%);
+  }
+  .farewell-beach::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: rgba(255,255,255,.5);
+  }
+
+  /* content */
+  .farewell-content {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 40px 24px;
+    opacity: 0; transition: opacity 1s ease .6s;
+  }
+  .farewell-overlay.active .farewell-content { opacity: 1; }
+
+  .farewell-logo {
+    font-size: 0.7rem; letter-spacing: 5px; text-transform: uppercase;
+    color: rgba(255,255,255,.8); margin-bottom: 24px;
+    border: 1px solid rgba(255,255,255,.3);
+    padding: 5px 14px; border-radius: 20px;
+    background: rgba(255,255,255,.1); backdrop-filter: blur(4px);
+  }
+  .farewell-title {
+    font-family: 'Arial Black',Impact,sans-serif;
+    font-size: 3rem; line-height: 1; color: var(--white);
+    text-shadow: 0 2px 20px rgba(0,0,0,.2);
+    margin-bottom: 16px;
+  }
+  .farewell-subtitle {
+    font-size: 1rem; color: rgba(255,255,255,.85);
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .farewell-name {
+    font-family: 'Arial Black',Impact,sans-serif;
+    font-size: 1.8rem; color: var(--white);
+    margin-bottom: 32px;
+    text-shadow: 0 2px 12px rgba(0,0,0,.15);
+  }
+  .farewell-wave-icon {
+    font-size: 2.5rem; margin-bottom: 20px;
+    animation: bob 3s ease-in-out infinite;
+  }
+  @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+  .farewell-divider {
+    width: 50px; height: 2px;
+    background: rgba(255,255,255,.4); border-radius: 1px;
+    margin: 0 auto 20px;
+  }
+  .farewell-tagline {
+    font-size: 0.8rem; color: rgba(255,255,255,.65);
+    letter-spacing: 1.5px;
+  }
 
   /* toast */
-  .toast { position: fixed; bottom: 28px; right: 28px; background: var(--teal); color: var(--white); font-size: 0.82rem; letter-spacing: 1px; padding: 12px 22px; border-radius: 8px; font-weight: 700; opacity: 0; transform: translateY(10px); transition: all .3s; z-index: 999; pointer-events: none; box-shadow: 0 4px 20px rgba(42,157,143,.4); }
+  .toast { position: fixed; bottom: 28px; right: 28px; background: var(--teal); color: var(--white); font-size: 0.82rem; letter-spacing: 1px; padding: 12px 22px; border-radius: 8px; font-weight: 700; opacity: 0; transform: translateY(10px); transition: all .3s; z-index: 400; pointer-events: none; box-shadow: 0 4px 20px rgba(42,157,143,.4); }
   .toast.show { opacity: 1; transform: translateY(0); }
 
-  /* wave divider on client page */
-  .wave-divider { width: 60px; height: 3px; background: linear-gradient(90deg, var(--teal), var(--teal-light)); border-radius: 2px; margin: 20px auto; }
-
-  @media(max-width:600px) { .form-grid { grid-template-columns:1fr 1fr; } .form-grid .btn { grid-column:1/-1; } .client-table th:nth-child(3),.client-table td:nth-child(3){display:none;} }
-  @media(max-width:400px) { .form-grid { grid-template-columns:1fr; } .client-greeting { font-size: 2rem; } }
+  @media(max-width:600px){ .form-grid{grid-template-columns:1fr 1fr;} .form-grid .btn{grid-column:1/-1;} .client-table th:nth-child(3),.client-table td:nth-child(3){display:none;} .farewell-title{font-size:2.2rem;} }
+  @media(max-width:400px){ .form-grid{grid-template-columns:1fr;} .client-greeting{font-size:2rem;} }
 </style>
 </head>
 <body>
+
+<!-- FAREWELL OVERLAY (ocean scene) -->
+<div class="farewell-overlay" id="farewellOverlay">
+  <div class="farewell-sky"></div>
+  <div class="farewell-sun"></div>
+  <div class="farewell-horizon"></div>
+  <div class="farewell-ocean">
+    <div class="farewell-shimmer"></div>
+    <div class="farewell-shimmer"></div>
+    <div class="farewell-shimmer"></div>
+    <div class="farewell-shimmer"></div>
+    <div class="farewell-shimmer"></div>
+    <div class="farewell-waves">
+      <div class="wave wave1"></div>
+      <div class="wave wave2"></div>
+      <div class="wave wave3"></div>
+    </div>
+  </div>
+  <div class="farewell-beach"></div>
+  <div class="farewell-content">
+    <div class="farewell-logo">Oceanz Vital</div>
+    <div class="farewell-wave-icon">🌊</div>
+    <div class="farewell-title">See You<br>Tomorrow</div>
+    <div class="farewell-divider"></div>
+    <div class="farewell-subtitle">Keep up the great work,</div>
+    <div class="farewell-name" id="farewellName"></div>
+    <div class="farewell-tagline">Your Morning Marine Foundation awaits</div>
+  </div>
+</div>
 
 <header class="site-header" id="siteHeader">
   <div class="brand">Morning <span>Marine</span> Routine</div>
@@ -228,15 +403,12 @@
         <div class="form-group"><label>&nbsp;</label><button class="btn btn-teal" onclick="addClient()">+ Add Client</button></div>
       </div>
     </div>
-
     <div class="section-title">All Clients</div>
-    <p class="section-sub">Sorted by Morning Marine Score &mdash; highest to lowest</p>
+    <p class="section-sub">Sorted by Lipidome Diversity Score &mdash; highest to lowest</p>
     <div class="card" style="padding:0;overflow:hidden">
       <table class="client-table">
-        <thead><tr><th>Client</th><th>Check-ins</th><th>Streak</th><th>MM Score</th><th>URL</th><th>Actions</th></tr></thead>
-        <tbody id="clientTableBody">
-          <tr><td colspan="6"><div class="loading"><div class="spinner"></div><br>Loading...</div></td></tr>
-        </tbody>
+        <thead><tr><th>Client</th><th>Check-ins</th><th>Streak</th><th>LD Score</th><th>URL</th><th>Actions</th></tr></thead>
+        <tbody id="clientTableBody"><tr><td colspan="6"><div class="loading"><div class="spinner"></div><br>Loading...</div></td></tr></tbody>
       </table>
     </div>
   </div>
@@ -270,12 +442,12 @@
     <div id="qrCanvas" style="display:flex;justify-content:center;margin:4px 0"></div>
     <div class="modal-actions">
       <button class="btn btn-ghost" onclick="copyQRUrl()">Copy URL</button>
-      <button class="btn btn-teal" onclick="printQR()">Print / Save</button>
+      <button class="btn btn-teal"  onclick="printQR()">Print / Save</button>
     </div>
   </div>
 </div>
 
-<!-- QR ENCODER (self-contained) -->
+<!-- QR ENCODER -->
 <script>
 var QRMaker=(function(){
   var EX=new Uint8Array(512),LG=new Uint8Array(256);
@@ -308,7 +480,7 @@ var SB_URL = 'https://qfpwdlpcjxjjmfyxhwnj.supabase.co';
 var SB_KEY = 'sb_publishable_qtArYvrIX3Ci3sim-8V4_Q_TXFYlX3y';
 var APP_URL = 'https://faqtotum24.github.io/morning-marine-routine/';
 
-async function sb(path, method, body){
+async function sb(path,method,body){
   var opts={method:method||'GET',headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json','Prefer':'return=representation'}};
   if(body)opts.body=JSON.stringify(body);
   var res=await fetch(SB_URL+'/rest/v1/'+path,opts);
@@ -329,12 +501,57 @@ function computeStats(dates,tz){
   var today=todayStr(tz),yest=new Date(Date.now()-86400000).toLocaleDateString('en-CA',{timeZone:tz});
   var streak=0,anchor=dates.includes(today)?today:yest,cur=new Date(anchor);
   while(true){var ds=cur.toLocaleDateString('en-CA',{timeZone:tz});if(dates.includes(ds)){streak++;cur=new Date(cur-86400000);}else break;}
-  var last30=[],now=Date.now();for(var i=0;i<30;i++)last30.push(new Date(now-i*86400000).toLocaleDateString('en-CA',{timeZone:tz}));
+  var last30=[],now=Date.now();
+  for(var i=0;i<30;i++)last30.push(new Date(now-i*86400000).toLocaleDateString('en-CA',{timeZone:tz}));
   return{total:dates.length,streak,mmScore:Math.round(last30.filter(d=>dates.includes(d)).length/30*100),checkedToday:dates.includes(today)};
 }
 
 function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
 
+// ── FAREWELL SCREEN ──────────────────────────────────────────
+function showFarewell(firstName){
+  document.getElementById('farewellName').textContent=firstName;
+  var el=document.getElementById('farewellOverlay');
+  el.classList.add('active');
+}
+
+// ── CHECKIN RITUAL ANIMATION ─────────────────────────────────
+function triggerCheckinReward(quote, firstName){
+  var btn       = document.getElementById('checkinBtn');
+  var rewardEl  = document.getElementById('quoteReward');
+  var goGetEmBtn= document.getElementById('goGetEmBtn');
+  var quoteText = document.getElementById('rewardQuoteText');
+  var quoteAuth = document.getElementById('rewardQuoteAuthor');
+
+  // 1. Button turns green
+  btn.classList.add('success');
+  btn.innerHTML='&#10003; Done!';
+
+  // 2. After 800ms — button fades out
+  setTimeout(()=>{
+    btn.classList.add('fading');
+  }, 800);
+
+  // 3. After 1.4s — hide button, show quote
+  setTimeout(()=>{
+    btn.classList.add('hidden');
+    quoteText.textContent='\u201C'+quote.quote_text+'\u201D';
+    quoteAuth.textContent='\u2014 '+quote.author;
+    rewardEl.classList.add('visible');
+    // trigger reflow then fade in
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      rewardEl.classList.add('shown');
+    }));
+  }, 1400);
+
+  // 4. After 2.4s — Go Get Em button appears
+  setTimeout(()=>{
+    goGetEmBtn.classList.add('shown');
+    goGetEmBtn.onclick = ()=>showFarewell(firstName);
+  }, 2400);
+}
+
+// ── ADD CLIENT ───────────────────────────────────────────────
 async function addClient(){
   var f=document.getElementById('inp-first').value.trim();
   var l=document.getElementById('inp-last').value.trim();
@@ -349,24 +566,20 @@ async function addClient(){
   }catch(e){showToast('Error: '+e.message);}
 }
 
+// ── ADMIN TABLE ──────────────────────────────────────────────
 async function renderTable(){
   var tbody=document.getElementById('clientTableBody');
   tbody.innerHTML='<tr><td colspan="6"><div class="loading"><div class="spinner"></div><br>Loading...</div></td></tr>';
   try{
     var clients=await sb('clients?select=*&order=created_at.asc');
-    if(!clients||!clients.length){
-      tbody.innerHTML='<tr><td colspan="6"><div class="empty-state"><span class="icon">🌊</span>No clients yet &mdash; add your first one above</div></td></tr>';
-      return;
-    }
+    if(!clients||!clients.length){tbody.innerHTML='<tr><td colspan="6"><div class="empty-state"><span class="icon">🌊</span>No clients yet &mdash; add your first one above</div></td></tr>';return;}
     var allCI=await sb('checkins?select=client_id,check_in_date');
     var rows=clients.map(c=>{
       var dates=(allCI||[]).filter(ci=>ci.client_id===c.id).map(ci=>ci.check_in_date);
       return{...c,s:computeStats(dates,c.tz)};
     }).sort((a,b)=>b.s.mmScore-a.s.mmScore);
-
     tbody.innerHTML=rows.map(c=>{
-      var url=clientURL(c.token),sc=c.s.mmScore;
-      var bc=sc>=70?'high':sc>=40?'mid':'low';
+      var url=clientURL(c.token),sc=c.s.mmScore,bc=sc>=70?'high':sc>=40?'mid':'low';
       return'<tr>'+
         '<td><strong>'+c.first_name+' '+c.family_name+'</strong><br><small style="color:var(--mid-grey);font-size:0.72rem">'+c.tz+'</small></td>'+
         '<td style="font-family:Arial Black,sans-serif;font-size:1.3rem;color:var(--teal)">'+c.s.total+'</td>'+
@@ -381,6 +594,7 @@ async function renderTable(){
   }catch(e){tbody.innerHTML='<tr><td colspan="6"><div class="empty-state">Error: '+e.message+'</div></td></tr>';}
 }
 
+// ── DEMO LIST ────────────────────────────────────────────────
 async function renderDemoList(){
   var el=document.getElementById('demoList');
   el.innerHTML='<div class="loading"><div class="spinner"></div></div>';
@@ -393,12 +607,8 @@ async function renderDemoList(){
   }catch(e){el.innerHTML='<div class="empty-state">Error: '+e.message+'</div>';}
 }
 
-function copyURL(url,btn){
-  navigator.clipboard.writeText(url).then(()=>{
-    btn.textContent='\u2713 Copied';btn.classList.add('copied');
-    setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},2000);
-  });
-}
+// ── COPY & QR ────────────────────────────────────────────────
+function copyURL(url,btn){navigator.clipboard.writeText(url).then(()=>{btn.textContent='\u2713 Copied';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},2000);});}
 
 var _qrUrl='';
 function showQR(token,name){
@@ -415,27 +625,51 @@ function printQR(){
   var name=document.getElementById('qrClientName').textContent,cv=document.querySelector('#qrCanvas canvas');
   if(!cv)return;
   var src=cv.toDataURL(),w=window.open('','_blank');
-  w.document.write('<html><head><title>QR \u2014 '+name+'</title><style>body{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;margin:0;font-family:sans-serif;background:#f7fbfc}h2{color:#2a9d8f;letter-spacing:3px;font-size:0.85rem;text-transform:uppercase;margin-bottom:4px}h3{color:#1a3a4a;margin-bottom:20px;font-size:1.2rem}img{width:260px;height:260px;border:1px solid #d0e8ec;border-radius:8px;padding:8px;background:white}p{margin-top:12px;font-size:0.65rem;color:#7a9aaa;word-break:break-all;max-width:280px;text-align:center}</style></head><body>');
-  w.document.write('<h2>Morning Marine Routine</h2><h3>'+name+'</h3><img src="'+src+'"><p>'+_qrUrl+'</p><script>window.onload=function(){window.print();}<\/script></body></html>');
+  w.document.write('<html><head><title>QR \u2014 '+name+'</title><style>body{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;margin:0;font-family:sans-serif;background:#f7fbfc}h2{color:#2a9d8f;letter-spacing:3px;font-size:0.85rem;text-transform:uppercase;margin-bottom:4px}h3{color:#1a3a4a;margin-bottom:20px;font-size:1.2rem}img{width:260px;height:260px;border:1px solid #d0e8ec;border-radius:8px;padding:8px;background:white}p{margin-top:12px;font-size:0.65rem;color:#7a9aaa;word-break:break-all;max-width:280px;text-align:center}</style></head><body><h2>Morning Marine Routine</h2><h3>'+name+'</h3><img src="'+src+'"><p>'+_qrUrl+'</p><script>window.onload=function(){window.print();}<\/script></body></html>');
   w.document.close();
 }
 
+// ── CLIENT PAGE ──────────────────────────────────────────────
 async function loadClientPage(token){
   var inner=document.getElementById('clientInner');
   document.getElementById('siteHeader').style.display='none';
   inner.innerHTML='<div class="loading"><div class="spinner"></div><br>Loading your page...</div>';
   try{
     var clients=await sb('clients?token=eq.'+token+'&limit=1');
-    if(!clients||!clients.length){
-      inner.innerHTML='<div class="not-found"><h2>404</h2><p>This check-in link is not valid.<br>Please check your QR code.</p></div>';
-      return;
-    }
+    if(!clients||!clients.length){inner.innerHTML='<div class="not-found"><h2>404</h2><p>This check-in link is not valid.<br>Please check your QR code.</p></div>';return;}
     var client=clients[0];
     var checkins=await sb('checkins?client_id=eq.'+client.id+'&select=check_in_date');
     var dates=(checkins||[]).map(c=>c.check_in_date);
     var s=computeStats(dates,client.tz);
     var quotes=await sb('quotes?active=eq.true&select=quote_text,author');
     var q=(quotes&&quotes.length)?quotes[Math.floor(Math.random()*quotes.length)]:{quote_text:'Keep going.',author:'Morning Marine'};
+
+    // store for check-in use
+    window._clientId   = client.id;
+    window._clientTz   = client.tz;
+    window._clientFirst= client.first_name;
+    window._rewardQuote= q;
+
+    var checkinZoneHtml;
+    if(s.checkedToday){
+      checkinZoneHtml=
+        '<div class="already-done-msg">&#10003; You\'ve already checked in today &mdash; great work!</div>'+
+        '<div style="margin-top:20px">'+
+          '<div class="quote-card">'+
+            '<div class="quote-text">&#8220;'+q.quote_text+'&#8221;</div>'+
+            '<div class="quote-author">\u2014 '+q.author+'</div>'+
+          '</div>'+
+        '</div>';
+    }else{
+      checkinZoneHtml=
+        '<button class="checkin-btn" id="checkinBtn" onclick="doCheckin()">Check In</button>'+
+        '<div class="quote-reward" id="quoteReward">'+
+          '<div class="quote-reward-icon">🌊</div>'+
+          '<div class="quote-reward-text" id="rewardQuoteText"></div>'+
+          '<div class="quote-reward-author" id="rewardQuoteAuthor"></div>'+
+          '<button class="gogetem-btn" id="goGetEmBtn">Go Get \'Em &rarr;</button>'+
+        '</div>';
+    }
 
     inner.innerHTML=
       '<div class="client-header">'+
@@ -445,37 +679,29 @@ async function loadClientPage(token){
         '<div class="client-date">'+dateFmt(client.tz)+'</div>'+
         '<div class="client-date" style="margin-top:4px;font-size:0.75rem">'+timeFmt(client.tz)+'</div>'+
       '</div>'+
-      '<div class="checkin-wrap">'+
-        '<button class="checkin-btn'+(s.checkedToday?' done':'')+'" id="checkinBtn" onclick="doCheckin(\''+client.id+'\',\''+client.tz+'\')"'+(s.checkedToday?' disabled':'')+'>'+
-          (s.checkedToday?'&#10003; Checked In Today':'Check In')+
-        '</button>'+
-        '<div class="checkin-status'+(s.checkedToday?' ok':'')+'" id="checkinStatus">'+(s.checkedToday?'Great work \u2014 you\'ve already checked in today!':'')+'</div>'+
-      '</div>'+
       '<div class="stats-grid">'+
         '<div class="stat-card"><div class="stat-label">Total Check-ins</div><div class="stat-value teal" id="statTotal">'+s.total+'</div></div>'+
         '<div class="stat-card"><div class="stat-label">Day Streak &#x1F525;</div><div class="stat-value" id="statStreak">'+s.streak+'</div></div>'+
-        '<div class="stat-card highlight"><div class="stat-label">Morning Marine Score</div><div class="stat-value" id="statScore">'+s.mmScore+'%</div><div class="stat-note">% of last 30 days</div></div>'+
+        '<div class="stat-card highlight"><div class="stat-label">Lipidome Diversity Score</div><div class="stat-value" id="statScore">'+s.mmScore+'%</div><div class="stat-note">% of last 30 days</div></div>'+
       '</div>'+
-      '<div class="quote-card"><div class="quote-text">&#8220;'+q.quote_text+'&#8221;</div><div class="quote-author">\u2014 '+q.author+'</div></div>';
-  }catch(e){
-    inner.innerHTML='<div class="not-found"><h2>Error</h2><p>'+e.message+'</p></div>';
-  }
+      '<div class="checkin-zone">'+checkinZoneHtml+'</div>';
+
+  }catch(e){inner.innerHTML='<div class="not-found"><h2>Error</h2><p>'+e.message+'</p></div>';}
 }
 
-async function doCheckin(clientId,tz){
+async function doCheckin(){
+  var clientId=window._clientId, tz=window._clientTz;
+  var firstName=window._clientFirst, quote=window._rewardQuote;
   try{
     await sb('checkins','POST',{client_id:clientId,check_in_date:todayStr(tz)});
+    // update stats silently
     var checkins=await sb('checkins?client_id=eq.'+clientId+'&select=check_in_date');
     var s=computeStats((checkins||[]).map(c=>c.check_in_date),tz);
-    document.getElementById('checkinBtn').innerHTML='&#10003; Checked In Today';
-    document.getElementById('checkinBtn').className='checkin-btn done';
-    document.getElementById('checkinBtn').disabled=true;
-    document.getElementById('checkinStatus').textContent='Great work \u2014 you\'ve already checked in today!';
-    document.getElementById('checkinStatus').className='checkin-status ok';
-    document.getElementById('statTotal').textContent=s.total;
-    document.getElementById('statStreak').textContent=s.streak;
-    document.getElementById('statScore').textContent=s.mmScore+'%';
-    showToast('Check-in recorded! \uD83D\uDCAA');
+    if(document.getElementById('statTotal'))  document.getElementById('statTotal').textContent=s.total;
+    if(document.getElementById('statStreak')) document.getElementById('statStreak').textContent=s.streak;
+    if(document.getElementById('statScore'))  document.getElementById('statScore').textContent=s.mmScore+'%';
+    // trigger the ritual animation
+    triggerCheckinReward(quote, firstName);
   }catch(e){
     if(e.message.includes('duplicate')||e.message.includes('unique')||e.message.includes('23505')){
       showToast('Already checked in today!');
@@ -483,6 +709,7 @@ async function doCheckin(clientId,tz){
   }
 }
 
+// ── VIEW SWITCHING ────────────────────────────────────────────
 function showView(name){
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
@@ -490,9 +717,10 @@ function showView(name){
   document.getElementById('siteHeader').style.display='';
   document.querySelectorAll('.nav-tab').forEach(t=>{if(t.textContent.toLowerCase().includes(name==='admin'?'admin':'demo'))t.classList.add('active');});
   if(name==='admin')renderTable();
-  if(name==='demo')renderDemoList();
+  if(name==='demo') renderDemoList();
 }
 
+// ── INIT ──────────────────────────────────────────────────────
 (function(){
   var token=new URLSearchParams(window.location.search).get('client');
   if(token){
