@@ -464,18 +464,7 @@ function printQR(){
   if(!cv)return;
   var src=cv.toDataURL(),w=window.open('','_blank');
   w.document.write('<html><head><title>QR \u2014 '+name+'</title><style>body{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;margin:0;font-family:sans-serif;background:#f7fbfc}h2{color:#2a9d8f;letter-spacing:3px;font-size:0.85rem;text-transform:uppercase;margin-bottom:4px}h3{color:#1a3a4a;margin-bottom:20px;font-size:1.2rem}img{width:260px;height:260px;border:1px solid #d0e8ec;border-radius:8px;padding:8px;background:white}p{margin-top:12px;font-size:0.65rem;color:#7a9aaa;word-break:break-all;max-width:280px;text-align:center}</style></head><body>');
-  w.document.write('<h2>Morning Marine Routine</h2><h3>'+name+'</h3><img src="'+src+'"><p>'+_qrUrl+'</p><script>window.onload=function(){window.print();}<\/script>
-<!-- FAREWELL SCREEN -->
-<div class="farewell-overlay" id="farewellOverlay">
-  <div class="farewell-bg"></div>
-  <div class="farewell-content">
-    <span class="farewell-wave">&#x1F30A;</span>
-    <div class="farewell-title">See You Tomorrow</div>
-    <div class="farewell-sub">Now go have a great day</div>
-  </div>
-</div>
-
-</body></html>');
+  w.document.write('<h2>Morning Marine Routine</h2><h3>'+name+'</h3><img src="'+src+'"><p>'+_qrUrl+'</p><script>window.onload=function(){window.print();}<\/script></body></html>');
   w.document.close();
 }
 
@@ -583,5 +572,16 @@ function showView(name){
   }
 })();
 </script>
+
+<!-- FAREWELL SCREEN -->
+<div class="farewell-overlay" id="farewellOverlay">
+  <div class="farewell-bg"></div>
+  <div class="farewell-content">
+    <span class="farewell-wave">&#x1F30A;</span>
+    <div class="farewell-title">See You Tomorrow</div>
+    <div class="farewell-sub">Now go have a great day</div>
+  </div>
+</div>
+
 </body>
 </html>
