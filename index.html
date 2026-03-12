@@ -187,6 +187,54 @@
   /* wave divider on client page */
   .wave-divider { width: 60px; height: 3px; background: linear-gradient(90deg, var(--teal), var(--teal-light)); border-radius: 2px; margin: 20px auto; }
 
+
+  /* ── FAREWELL SCREEN ── */
+  .farewell-overlay {
+    display: none; position: fixed; inset: 0; z-index: 9999;
+    background: #0a2a3a; align-items: center; justify-content: center;
+    flex-direction: column; opacity: 0; transition: opacity 1.2s ease;
+  }
+  .farewell-overlay.visible { display: flex; }
+  .farewell-overlay.faded-in { opacity: 1; }
+  .farewell-bg {
+    position: absolute; inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=1400&q=80');
+    background-size: cover; background-position: center; opacity: 0.75;
+  }
+  .farewell-content { position: relative; z-index: 2; text-align: center; color: white; padding: 40px; }
+  .farewell-title {
+    font-family: 'Arial Black',Impact,sans-serif; font-size: 2.8rem; letter-spacing: 4px;
+    color: #ffffff; text-shadow: 0 2px 24px rgba(0,0,0,.5); margin-bottom: 16px; line-height: 1.15;
+  }
+  .farewell-sub { font-size: 1rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,.8); text-shadow: 0 1px 8px rgba(0,0,0,.4); }
+  .farewell-wave { font-size: 3.5rem; margin-bottom: 20px; display: block; animation: wavebob 2.2s ease-in-out infinite; }
+  @keyframes wavebob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+
+  /* ── CHECKIN FLASH ── */
+  @keyframes goGreen {
+    0%   { background: linear-gradient(135deg, #2a9d8f 0%, #4dbfb3 100%); color: white; }
+    35%  { background: linear-gradient(135deg, #1db954 0%, #2ecc71 100%); color: white; transform: scale(1.02); }
+    100% { background: linear-gradient(135deg, #1db954 0%, #2ecc71 100%); color: white; opacity: 0; transform: scale(1.02); }
+  }
+  .checkin-btn.celebrating { animation: goGreen 1.2s ease forwards; pointer-events: none; }
+
+  /* ── QUOTE REVEAL ── */
+  .quote-card { opacity: 0; transition: opacity 1s ease; }
+  .quote-card.revealed { opacity: 1; }
+
+  /* ── GREAT DAY CTA ── */
+  .great-day-wrap { opacity: 0; transition: opacity 1s ease; margin-top: 16px; }
+  .great-day-wrap.revealed { opacity: 1; }
+  .great-day-btn {
+    display: block; width: 100%;
+    background: linear-gradient(135deg, #c9a84c 0%, #e8c97a 100%);
+    color: white; font-family: 'Arial Black',Impact,sans-serif;
+    font-size: 1.1rem; letter-spacing: 3px; text-transform: uppercase;
+    padding: 20px; border-radius: 12px; border: none; cursor: pointer;
+    box-shadow: 0 6px 28px rgba(201,168,76,.45); transition: all .2s;
+  }
+  .great-day-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(201,168,76,.6); }
+
   @media(max-width:600px) { .form-grid { grid-template-columns:1fr 1fr; } .form-grid .btn { grid-column:1/-1; } .client-table th:nth-child(3),.client-table td:nth-child(3){display:none;} }
   @media(max-width:400px) { .form-grid { grid-template-columns:1fr; } .client-greeting { font-size: 2rem; } }
 </style>
@@ -416,7 +464,18 @@ function printQR(){
   if(!cv)return;
   var src=cv.toDataURL(),w=window.open('','_blank');
   w.document.write('<html><head><title>QR \u2014 '+name+'</title><style>body{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;margin:0;font-family:sans-serif;background:#f7fbfc}h2{color:#2a9d8f;letter-spacing:3px;font-size:0.85rem;text-transform:uppercase;margin-bottom:4px}h3{color:#1a3a4a;margin-bottom:20px;font-size:1.2rem}img{width:260px;height:260px;border:1px solid #d0e8ec;border-radius:8px;padding:8px;background:white}p{margin-top:12px;font-size:0.65rem;color:#7a9aaa;word-break:break-all;max-width:280px;text-align:center}</style></head><body>');
-  w.document.write('<h2>Morning Marine Routine</h2><h3>'+name+'</h3><img src="'+src+'"><p>'+_qrUrl+'</p><script>window.onload=function(){window.print();}<\/script></body></html>');
+  w.document.write('<h2>Morning Marine Routine</h2><h3>'+name+'</h3><img src="'+src+'"><p>'+_qrUrl+'</p><script>window.onload=function(){window.print();}<\/script>
+<!-- FAREWELL SCREEN -->
+<div class="farewell-overlay" id="farewellOverlay">
+  <div class="farewell-bg"></div>
+  <div class="farewell-content">
+    <span class="farewell-wave">&#x1F30A;</span>
+    <div class="farewell-title">See You Tomorrow</div>
+    <div class="farewell-sub">Now go have a great day</div>
+  </div>
+</div>
+
+</body></html>');
   w.document.close();
 }
 
@@ -454,9 +513,12 @@ async function loadClientPage(token){
       '<div class="stats-grid">'+
         '<div class="stat-card"><div class="stat-label">Total Check-ins</div><div class="stat-value teal" id="statTotal">'+s.total+'</div></div>'+
         '<div class="stat-card"><div class="stat-label">Day Streak &#x1F525;</div><div class="stat-value" id="statStreak">'+s.streak+'</div></div>'+
-        '<div class="stat-card highlight"><div class="stat-label">Morning Marine Score</div><div class="stat-value" id="statScore">'+s.mmScore+'%</div><div class="stat-note">% of last 30 days</div></div>'+
+        '<div class="stat-card highlight"><div class="stat-label">Lipidome Diversity Score</div><div class="stat-value" id="statScore">'+s.mmScore+'%</div><div class="stat-note">% of last 30 days</div></div>'+
       '</div>'+
-      '<div class="quote-card"><div class="quote-text">&#8220;'+q.quote_text+'&#8221;</div><div class="quote-author">\u2014 '+q.author+'</div></div>';
+      '<div class="quote-card" id="quoteCard"><div class="quote-text">&#8220;'+q.quote_text+'&#8221;</div><div class="quote-author">\u2014 '+q.author+'</div></div>'+
+      '<div class="great-day-wrap" id="greatDayWrap">'+
+        '<button class="great-day-btn" onclick="showFarewell()">Have a Great Day &#x2192;</button>'+
+      '</div>';
   }catch(e){
     inner.innerHTML='<div class="not-found"><h2>Error</h2><p>'+e.message+'</p></div>';
   }
@@ -467,20 +529,36 @@ async function doCheckin(clientId,tz){
     await sb('checkins','POST',{client_id:clientId,check_in_date:todayStr(tz)});
     var checkins=await sb('checkins?client_id=eq.'+clientId+'&select=check_in_date');
     var s=computeStats((checkins||[]).map(c=>c.check_in_date),tz);
-    document.getElementById('checkinBtn').innerHTML='&#10003; Checked In Today';
-    document.getElementById('checkinBtn').className='checkin-btn done';
-    document.getElementById('checkinBtn').disabled=true;
-    document.getElementById('checkinStatus').textContent='Great work \u2014 you\'ve already checked in today!';
-    document.getElementById('checkinStatus').className='checkin-status ok';
     document.getElementById('statTotal').textContent=s.total;
     document.getElementById('statStreak').textContent=s.streak;
     document.getElementById('statScore').textContent=s.mmScore+'%';
-    showToast('Check-in recorded! \uD83D\uDCAA');
+    var btn=document.getElementById('checkinBtn');
+    var statusEl=document.getElementById('checkinStatus');
+    btn.innerHTML='&#10003; Checked In!';
+    btn.classList.add('celebrating');
+    if(statusEl) statusEl.textContent='';
+    setTimeout(function(){
+      btn.style.display='none';
+      if(statusEl) statusEl.style.display='none';
+      var quoteEl=document.getElementById('quoteCard');
+      var ctaEl=document.getElementById('greatDayWrap');
+      if(quoteEl) quoteEl.classList.add('revealed');
+      setTimeout(function(){ if(ctaEl) ctaEl.classList.add('revealed'); }, 700);
+    }, 1250);
+    showToast('Check-in recorded!');
   }catch(e){
     if(e.message.includes('duplicate')||e.message.includes('unique')||e.message.includes('23505')){
       showToast('Already checked in today!');
     }else{showToast('Error: '+e.message);}
   }
+}
+
+function showFarewell(){
+  var el=document.getElementById('farewellOverlay');
+  el.classList.add('visible');
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){ el.classList.add('faded-in'); });
+  });
 }
 
 function showView(name){
